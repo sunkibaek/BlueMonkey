@@ -3717,7 +3717,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -3779,6 +3779,13 @@ react-devtools-core@3.1.0:
   dependencies:
     shell-quote "^1.6.1"
     ws "^2.0.3"
+
+react-native-calendars@^1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.17.3.tgz#27737086082602c1ba29c3450333ddbb4f28c77d"
+  dependencies:
+    prop-types "^15.5.10"
+    xdate "^0.8.0"
 
 react-native-typescript-transformer@^1.2.3:
   version "1.2.3"
@@ -4839,6 +4846,10 @@ xcode@^0.9.1:
     pegjs "^0.10.0"
     simple-plist "^0.2.1"
     uuid "3.0.1"
+
+xdate@^0.8.0:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/xdate/-/xdate-0.8.2.tgz#d7b033c00485d02695baf0044f4eacda3fc961a3"
 
 xml-name-validator@^3.0.0:
   version "3.0.0"
