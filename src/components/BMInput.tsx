@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  RegisteredStyle,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ViewStyle
+} from "react-native";
 
 import Color from "../styles/Color";
 
 interface IProps {
   label: string;
+  style: RegisteredStyle<ViewStyle>;
 }
 
 const styles = StyleSheet.create({
@@ -13,14 +21,15 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderBottomColor: Color.BLACK,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
+    paddingVertical: 8
   }
 });
 
 class BMInput extends Component<IProps> {
   public render() {
     return (
-      <View>
+      <View style={this.props.style}>
         <Text style={styles.label}>{this.props.label}</Text>
 
         <TextInput style={styles.textInput} />

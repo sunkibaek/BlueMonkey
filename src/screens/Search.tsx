@@ -3,15 +3,24 @@ import { StyleSheet, View } from "react-native";
 
 import BMInput from "../components/BMInput";
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 16
+  },
+  input: {
+    marginBottom: 16
+  }
+});
 
 class Search extends Component {
   public render() {
     return (
-      <View>
-        <BMInput label="지역명" />
-        <BMInput label="날짜" />
-        <BMInput label="인원" />
+      <View style={styles.container}>
+        <BMInput label="지역명" style={styles.input} />
+
+        <BMInput label="날짜" style={styles.input} />
+
+        <BMInput label="인원" style={styles.input} />
       </View>
     );
   }
