@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { Modal, StyleSheet, View } from "react-native";
-import { Calendar } from "react-native-calendars";
+import { StyleSheet, View } from "react-native";
 
 import BMInput from "../components/BMInput";
+import CalendarModal from "../components/CalendarModal";
+
+interface IState {
+  isCalendarModalVisible: boolean;
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -13,37 +17,47 @@ const styles = StyleSheet.create({
   }
 });
 
-class Search extends Component {
+class Search extends Component<{}, IState> {
+  constructor(props: {}) {
+    super(props);
+
+    this.state = {
+      isCalendarModalVisible: false
+    };
+  }
+
   public render() {
     return (
       <View style={styles.container}>
         <BMInput label="지역명" style={styles.input} />
 
-        <BMInput label="날짜" style={styles.input} />
+        <BMInput
+          label="날짜"
+          style={styles.input}
+          onFocus={this.openCalendarModal}
+        />
 
         <BMInput label="인원" style={styles.input} />
-        <Modal animationType="slide" transparent={true} visible={true}>
-          <View
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              flex: 1,
-              justifyContent: "flex-end"
-            }}
-          >
-            <View
-              style={{
-                borderTopLeftRadius: 8,
-                borderTopRightRadius: 8,
-                overflow: "hidden"
-              }}
-            >
-              <Calendar />
-            </View>
-          </View>
-        </Modal>
+
+        <CalendarModal
+          visible={this.state.isCalendarModalVisible}
+          onClose={this.closeCalendarModal}
+        />
       </View>
     );
   }
+
+  private openCalendarModal = () => {
+    this.setState(() => ({
+      isCalendarModalVisible: true
+    }));
+  };
+
+  private closeCalendarModal = () => {
+    this.setState(() => ({
+      isCalendarModalVisible: false
+    }));
+  };
 }
 
 export default Search;
