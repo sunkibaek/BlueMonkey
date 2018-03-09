@@ -1,5 +1,5 @@
 declare module "react-native-calendars" {
-  function Calendar(): JSX.Element;
+  function Calendar(props: any): JSX.Element;
 
   export { Calendar };
 }
