@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { Modal, StyleSheet, View } from "react-native";
+import { Calendar } from "react-native-calendars";
 
 import BMInput from "../components/BMInput";
 
@@ -21,6 +22,25 @@ class Search extends Component {
         <BMInput label="날짜" style={styles.input} />
 
         <BMInput label="인원" style={styles.input} />
+        <Modal animationType="slide" transparent={true} visible={true}>
+          <View
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              flex: 1,
+              justifyContent: "flex-end"
+            }}
+          >
+            <View
+              style={{
+                borderTopLeftRadius: 8,
+                borderTopRightRadius: 8,
+                overflow: "hidden"
+              }}
+            >
+              <Calendar />
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }
