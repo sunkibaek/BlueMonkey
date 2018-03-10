@@ -40,11 +40,10 @@ class List extends Component {
 
   private renderItem = ({ index }: { index: number }) => {
     const style = {
-      marginRight: index % 2 === 0 ? 16 : 0,
-      width: ITEM_WIDTH
+      marginRight: index % 2 === 0 ? 16 : 0
     };
 
-    return <Card style={style} />;
+    return <Card width={ITEM_WIDTH} style={style} />;
   };
 }
 

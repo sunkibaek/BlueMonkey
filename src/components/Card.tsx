@@ -12,7 +12,10 @@ import Tag from "./Tag";
 
 interface IProps {
   style?: RegisteredStyle<ViewStyle> | ViewStyle;
+  width: number;
 }
+
+const IMAGE_RATIO = 3 / 4;
 
 const styles = StyleSheet.create({
   container: {
@@ -30,8 +33,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor: Color.GRAY,
     borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    height: 100
+    borderTopRightRadius: 4
   },
   labelContainer: {
     flexDirection: "row",
@@ -55,10 +57,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const Card = ({ style }: IProps) => {
+const Card = ({ style, width }: IProps) => {
+  const height = width * IMAGE_RATIO;
+
   return (
-    <View style={[styles.container, style]}>
-      <View style={styles.imageContainer} />
+    <View style={[styles.container, { width }, style]}>
+      <View style={[styles.imageContainer, { height }]} />
 
       <View style={styles.textContainer}>
         <View style={styles.labelContainer}>
