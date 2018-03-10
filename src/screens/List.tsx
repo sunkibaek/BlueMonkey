@@ -3,13 +3,16 @@ import { Dimensions, FlatList, StyleSheet, View } from "react-native";
 
 import Card from "../components/Card";
 import Color from "../styles/Color";
+import { ITrip } from "../typings/trip";
+
+// tslint:disable-next-line:no-var-requires
+const trips = require("../../trips.json");
 
 const ITEM_WIDTH = (Dimensions.get("window").width - 16 * 3) / 2;
 
 const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: Color.LIGHTGRAY,
-    flex: 1,
     padding: 16
   },
   separator: {
@@ -26,7 +29,7 @@ class List extends Component {
     return (
       <FlatList
         contentContainerStyle={styles.contentContainer}
-        data={[{ key: "1" }, { key: "2" }, { key: "3" }, { key: "4" }]}
+        data={trips}
         numColumns={2}
         renderItem={this.renderItem}
         ItemSeparatorComponent={this.itemSeparator}
@@ -38,12 +41,12 @@ class List extends Component {
     return <View style={styles.separator} />;
   };
 
-  private renderItem = ({ index }: { index: number }) => {
+  private renderItem = ({ item, index }: { item: ITrip; index: number }) => {
     const style = {
       marginRight: index % 2 === 0 ? 16 : 0
     };
 
-    return <Card width={ITEM_WIDTH} style={style} />;
+    return <Card width={ITEM_WIDTH} style={style} trip={item} />;
   };
 }
 

@@ -7,11 +7,14 @@ import {
   ViewStyle
 } from "react-native";
 
+import priceFormat from "../commons/priceFormat";
 import Color from "../styles/Color";
+import { ITrip } from "../typings/trip";
 import Tag from "./Tag";
 
 interface IProps {
   style?: RegisteredStyle<ViewStyle> | ViewStyle;
+  trip: ITrip;
   width: number;
 }
 
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Card = ({ style, width }: IProps) => {
+const Card = ({ style, trip, width }: IProps) => {
   const height = width * IMAGE_RATIO;
 
   return (
@@ -66,12 +69,11 @@ const Card = ({ style, width }: IProps) => {
 
       <View style={styles.textContainer}>
         <View style={styles.labelContainer}>
-          <Tag title="제주도" />
-          <Tag title="월정리" />
+          {trip.tags.map(tag => <Tag key={tag} title={tag} />)}
         </View>
 
-        <Text style={styles.title}>당신과 내가 함께할 제주도 해변가</Text>
-        <Text style={styles.price}>650,000원</Text>
+        <Text style={styles.title}>{trip.title}</Text>
+        <Text style={styles.price}>{priceFormat(trip.price)}</Text>
         <Text style={styles.reservationInfo}>6월, 7월 예약 가능</Text>
       </View>
     </View>
