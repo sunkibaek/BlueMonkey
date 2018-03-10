@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
+import { NavigationInjectedProps } from "react-navigation";
 
+import BMButton from "../components/BMButton";
 import BMInput from "../components/BMInput";
 import CalendarModal from "../components/CalendarModal";
+import Color from "../styles/Color";
 
 interface IState {
   isCalendarModalVisible: boolean;
@@ -10,6 +13,8 @@ interface IState {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Color.WHITE,
+    flex: 1,
     padding: 16
   },
   input: {
@@ -30,9 +35,13 @@ class Search extends Component<{}, IState> {
     };
   }
 
+  private get navigation() {
+    return (this.props as NavigationInjectedProps).navigation;
+  }
+
   public render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <BMInput label="지역명" style={styles.input} />
 
         <BMInput
@@ -43,13 +52,19 @@ class Search extends Component<{}, IState> {
 
         <BMInput label="인원" style={styles.input} />
 
+        <BMButton onPress={this.search} title="검색" />
+
         <CalendarModal
           visible={this.state.isCalendarModalVisible}
           onClose={this.closeCalendarModal}
         />
-      </View>
+      </ScrollView>
     );
   }
+
+  private search = () => {
+    this.navigation.navigate("List");
+  };
 
   private openCalendarModal = () => {
     this.setState(() => ({

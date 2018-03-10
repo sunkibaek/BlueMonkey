@@ -19,11 +19,11 @@ interface IProps {
 
 const styles = StyleSheet.create({
   label: {
-    color: Color.BLUE
+    color: Color.GRAY
   },
   textInput: {
-    borderBottomColor: Color.BLACK,
-    borderBottomWidth: 2,
+    borderBottomColor: Color.GRAY,
+    borderBottomWidth: 1,
     paddingVertical: 8
   }
 });
@@ -31,12 +31,10 @@ const styles = StyleSheet.create({
 class BMInput extends Component<IProps> {
   public render() {
     return (
-      <View>
-        <View style={this.props.style}>
-          <Text style={styles.label}>{this.props.label}</Text>
+      <View style={this.props.style}>
+        <Text style={styles.label}>{this.props.label}</Text>
 
-          <TextInput style={styles.textInput} onFocus={this.props.onFocus} />
-        </View>
+        <TextInput style={styles.textInput} onFocus={this.props.onFocus} />
       </View>
     );
   }

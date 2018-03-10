@@ -31,7 +31,7 @@ class CalendarModal extends Component<IProps> {
 
     return (
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={visible}
         onRequestClose={onClose}
