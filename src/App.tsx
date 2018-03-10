@@ -1,12 +1,16 @@
-import React from "react";
-import { View } from "react-native";
+import { StackNavigator } from "react-navigation";
 
 import Search from "./screens/Search";
 
-const App = () => (
-  <View style={{ paddingTop: 20 }}>
-    <Search />
-  </View>
+const App = StackNavigator(
+  {
+    Search: {
+      screen: Search
+    }
+  },
+  {
+    initialRouteName: "Search"
+  }
 );
 
 export default App;

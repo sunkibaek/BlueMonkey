@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
 });
 
 class Search extends Component<{}, IState> {
+  public static navigationOptions = {
+    title: "검색"
+  };
+
   constructor(props: {}) {
     super(props);
 
