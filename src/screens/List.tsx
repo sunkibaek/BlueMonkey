@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   Dimensions,
   FlatList,
+  InteractionManager,
   StyleSheet,
   TouchableOpacity,
   View
@@ -80,7 +81,9 @@ class List extends Component {
   private navigateToSearchModal = () => {
     this.navigator.push("search", {
       setFilterList: ({ guestCount }: { guestCount: number }) => {
-        this.navigator.updateCurrentRouteParams({ guestCount });
+        InteractionManager.runAfterInteractions(() => {
+          this.navigator.updateCurrentRouteParams({ guestCount });
+        });
       }
     });
   };
