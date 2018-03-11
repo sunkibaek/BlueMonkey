@@ -47,7 +47,11 @@ class List extends Component {
           <Icon color={Color.GRAY} name="search" size={18} />
         </TouchableOpacity>
       ),
-      title: "가장 선호하는 여행"
+      title: (params: any) => {
+        return params.guestCount
+          ? `가장 선호하는 ${params.guestCount}인 여행`
+          : "가장 선호하는 여행";
+      }
     }
   };
 
@@ -74,7 +78,11 @@ class List extends Component {
   }
 
   private navigateToSearchModal = () => {
-    this.navigator.push("search");
+    this.navigator.push("search", {
+      setFilterList: ({ guestCount }: { guestCount: number }) => {
+        this.navigator.updateCurrentRouteParams({ guestCount });
+      }
+    });
   };
 
   private itemSeparator = () => {

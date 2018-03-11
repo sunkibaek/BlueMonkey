@@ -59,6 +59,10 @@ class Search extends Component<{}, IState> {
     return (this.props as any).navigator;
   }
 
+  private get route() {
+    return (this.props as any).route;
+  }
+
   public render() {
     return (
       <View style={styles.container}>
@@ -95,6 +99,7 @@ class Search extends Component<{}, IState> {
   };
 
   private search = () => {
+    this.route.params.setFilterList({ guestCount: 10 });
     this.navigator.pop();
   };
 

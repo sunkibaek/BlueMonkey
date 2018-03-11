@@ -8,10 +8,13 @@ import React from "react";
 import List from "./screens/List";
 import Search from "./screens/Search";
 
-const Router = createRouter(() => ({
-  list: () => List,
-  search: () => Search
-}));
+const Router = createRouter(
+  () => ({
+    list: () => List,
+    search: () => Search
+  }),
+  { ignoreSerializableWarnings: true }
+);
 
 const App = () => (
   <NavigationProvider router={Router}>

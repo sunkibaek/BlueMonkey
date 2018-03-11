@@ -1,5 +1,5 @@
 declare module "@expo/ex-navigation" {
-  function createRouter(generator: () => any): any;
+  function createRouter(generator: () => any, options: any): any;
   function NavigationProvider(props: any): JSX.Element;
   function StackNavigation(props: any): JSX.Element;
 
