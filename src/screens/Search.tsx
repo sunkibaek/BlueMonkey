@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { NavigationInjectedProps } from "react-navigation";
 
 import BMButton from "../components/BMButton";
@@ -13,20 +20,27 @@ interface IState {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Color.WHITE,
-    flex: 1,
-    padding: 16
+    flex: 1
+  },
+  goBackButton: {
+    paddingRight: 8
   },
   input: {
     marginBottom: 16
+  },
+  navigationBar: {
+    alignItems: "flex-end",
+    backgroundColor: Color.WHITE,
+    paddingTop: StatusBar.currentHeight || 20
+  },
+  scrollView: {
+    backgroundColor: Color.WHITE,
+    flex: 1,
+    padding: 16
   }
 });
 
 class Search extends Component<{}, IState> {
-  public static navigationOptions = {
-    title: "검색"
-  };
-
   constructor(props: {}) {
     super(props);
 
@@ -41,26 +55,38 @@ class Search extends Component<{}, IState> {
 
   public render() {
     return (
-      <ScrollView style={styles.container}>
-        <BMInput label="지역명" style={styles.input} />
+      <View style={styles.container}>
+        <View style={styles.navigationBar}>
+          <TouchableOpacity onPress={this.goBack} style={styles.goBackButton}>
+            <Icon color={Color.GRAY} name="close" size={18} />
+          </TouchableOpacity>
+        </View>
 
-        <BMInput
-          label="날짜"
-          style={styles.input}
-          onFocus={this.openCalendarModal}
-        />
+        <ScrollView style={styles.scrollView}>
+          <BMInput label="지역명" style={styles.input} />
 
-        <BMInput label="인원" style={styles.input} />
+          <BMInput
+            label="날짜"
+            style={styles.input}
+            onFocus={this.openCalendarModal}
+          />
 
-        <BMButton onPress={this.search} title="검색" />
+          <BMInput label="인원" style={styles.input} />
 
-        <CalendarModal
-          visible={this.state.isCalendarModalVisible}
-          onClose={this.closeCalendarModal}
-        />
-      </ScrollView>
+          <BMButton onPress={this.search} title="검색" />
+
+          <CalendarModal
+            visible={this.state.isCalendarModalVisible}
+            onClose={this.closeCalendarModal}
+          />
+        </ScrollView>
+      </View>
     );
   }
+
+  private goBack = () => {
+    this.navigation.goBack();
+  };
 
   private search = () => {
     this.navigation.navigate("List");
