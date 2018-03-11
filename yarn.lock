@@ -341,6 +341,13 @@
   version "22.2.0"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.0.tgz#55ce83139f7ad1b48b414c3927746614c6963c0f"
 
+"@types/react-native-vector-icons@^4.4.3":
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-4.4.3.tgz#37f6d5dd06418a144c7c082dbca9ce37c14f033f"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
 "@types/react-native@*", "@types/react-native@^0.52.16":
   version "0.52.16"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.52.16.tgz#d474cdba5b44e4b695e4c918c88d3e171772c298"
