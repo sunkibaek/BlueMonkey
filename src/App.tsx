@@ -1,31 +1,22 @@
-import { StackNavigator } from "react-navigation";
+import {
+  createRouter,
+  NavigationProvider,
+  StackNavigation
+} from "@expo/ex-navigation";
+import React from "react";
 
 import List from "./screens/List";
 import Search from "./screens/Search";
 
-const Main = StackNavigator(
-  {
-    List: {
-      screen: List
-    }
-  },
-  {
-    initialRouteName: "List"
-  }
-);
-const App = StackNavigator(
-  {
-    Main: {
-      screen: Main
-    },
-    SearchModal: {
-      screen: Search
-    }
-  },
-  {
-    headerMode: "none",
-    mode: "modal"
-  }
+const Router = createRouter(() => ({
+  list: () => List,
+  search: () => Search
+}));
+
+const App = () => (
+  <NavigationProvider router={Router}>
+    <StackNavigation initialRoute={Router.getRoute("list")} />
+  </NavigationProvider>
 );
 
 export default App;

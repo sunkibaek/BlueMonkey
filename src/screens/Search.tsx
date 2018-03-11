@@ -1,3 +1,4 @@
+import { NavigationStyles } from "@expo/ex-navigation";
 import React, { Component } from "react";
 import {
   ScrollView,
@@ -7,7 +8,6 @@ import {
   View
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { NavigationInjectedProps } from "react-navigation";
 
 import BMButton from "../components/BMButton";
 import BMInput from "../components/BMInput";
@@ -41,6 +41,12 @@ const styles = StyleSheet.create({
 });
 
 class Search extends Component<{}, IState> {
+  public static route = {
+    styles: {
+      ...NavigationStyles.FloatVertical
+    }
+  };
+
   constructor(props: {}) {
     super(props);
 
@@ -49,8 +55,8 @@ class Search extends Component<{}, IState> {
     };
   }
 
-  private get navigation() {
-    return (this.props as NavigationInjectedProps).navigation;
+  private get navigator() {
+    return (this.props as any).navigator;
   }
 
   public render() {
@@ -85,11 +91,11 @@ class Search extends Component<{}, IState> {
   }
 
   private goBack = () => {
-    this.navigation.goBack();
+    this.navigator.pop();
   };
 
   private search = () => {
-    this.navigation.navigate("List");
+    this.navigator.pop();
   };
 
   private openCalendarModal = () => {

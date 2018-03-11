@@ -7,11 +7,6 @@ import {
   View
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {
-  NavigationInjectedProps,
-  NavigationParams,
-  NavigationStackScreenOptions
-} from "react-navigation";
 
 import Card from "../components/Card";
 import Color from "../styles/Color";
@@ -32,6 +27,8 @@ const styles = StyleSheet.create({
     padding: Space.MEDIUM
   },
   searchButton: {
+    flex: 1,
+    justifyContent: "center",
     paddingRight: Space.SMALL
   },
   separator: {
@@ -40,36 +37,28 @@ const styles = StyleSheet.create({
 });
 
 class List extends Component {
-  public static navigationOptions = ({
-    navigation
-  }: {
-    navigation: NavigationParams;
-  }): NavigationStackScreenOptions => {
-    const params = navigation.state.params || {
-      navigateToSearchModal: () => null
-    };
-
-    return {
-      headerRight: (
+  public static route = {
+    navigationBar: {
+      renderRight: (route: any) => (
         <TouchableOpacity
-          onPress={params.navigateToSearchModal}
+          onPress={route.params.navigateToSearchModal}
           style={styles.searchButton}
         >
           <Icon color={Color.GRAY} name="search" size={18} />
         </TouchableOpacity>
       ),
       title: "가장 선호하는 여행"
-    };
+    }
   };
 
   public componentWillMount() {
-    this.navigation.setParams({
+    this.navigator.updateCurrentRouteParams({
       navigateToSearchModal: this.navigateToSearchModal
     });
   }
 
-  private get navigation() {
-    return (this.props as NavigationInjectedProps).navigation;
+  private get navigator() {
+    return (this.props as any).navigator;
   }
 
   public render() {
@@ -85,7 +74,7 @@ class List extends Component {
   }
 
   private navigateToSearchModal = () => {
-    this.navigation.navigate("SearchModal");
+    this.navigator.push("search");
   };
 
   private itemSeparator = () => {
