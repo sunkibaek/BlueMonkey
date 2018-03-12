@@ -93,14 +93,20 @@ class List extends Component {
   private navigateToSearchModal = () => {
     this.navigator.push("search", {
       setFilterList: ({
+        date,
         guestCount,
         location
       }: {
+        date: string;
         guestCount: string;
         location: string;
       }) => {
         InteractionManager.runAfterInteractions(() => {
-          this.navigator.updateCurrentRouteParams({ guestCount, location });
+          this.navigator.updateCurrentRouteParams({
+            date,
+            guestCount,
+            location
+          });
         });
       }
     });

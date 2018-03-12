@@ -87,8 +87,9 @@ class Search extends Component<{}, IState> {
           />
 
           <BMInput
+            fauxInput={true}
             label="날짜"
-            onFocus={this.openCalendarModal}
+            onPress={this.openCalendarModal}
             style={styles.input}
             value={this.state.date}
           />
@@ -104,6 +105,7 @@ class Search extends Component<{}, IState> {
           <BMButton onPress={this.search} title="검색" />
 
           <CalendarModal
+            onDaySelect={this.setDate}
             visible={this.state.isCalendarModalVisible}
             onClose={this.closeCalendarModal}
           />
@@ -111,6 +113,10 @@ class Search extends Component<{}, IState> {
       </View>
     );
   }
+
+  private setDate = (dateString: string) => {
+    this.setState(() => ({ date: dateString }));
+  };
 
   private setGuestCount = (guestCount: string) => {
     this.setState(() => ({ guestCount }));
@@ -126,6 +132,7 @@ class Search extends Component<{}, IState> {
 
   private search = () => {
     this.route.params.setFilterList({
+      date: this.state.date,
       guestCount: this.state.guestCount,
       location: this.state.location
     });

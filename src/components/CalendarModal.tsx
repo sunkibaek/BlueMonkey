@@ -6,10 +6,22 @@ import {
   View
 } from "react-native";
 import { Calendar } from "react-native-calendars";
+import Color from "../styles/Color";
 
 interface IProps {
   visible: boolean;
   onClose: () => void;
+  onDaySelect: (dateString: string) => void;
+}
+interface IDay {
+  year: number;
+  month: number;
+  day: number;
+  timestamp: number;
+  dateString: string;
+}
+interface IState {
+  selectedDay: IDay | null;
 }
 
 const styles = StyleSheet.create({
@@ -25,7 +37,13 @@ const styles = StyleSheet.create({
   }
 });
 
-class CalendarModal extends Component<IProps> {
+class CalendarModal extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = { selectedDay: null };
+  }
+
   public render() {
     const { visible, onClose } = this.props;
 
@@ -40,16 +58,7 @@ class CalendarModal extends Component<IProps> {
           <View style={styles.backdrop}>
             <View style={styles.container}>
               <Calendar
-                markedDates={{
-                  "2018-03-12": {
-                    color: "blue",
-                    selected: "blue"
-                  },
-                  "2018-03-13": {
-                    color: "blue",
-                    selected: "blue"
-                  }
-                }}
+                markedDates={this.getMarkedDates()}
                 minDate={Date()}
                 markingType="period"
                 onDayPress={this.selectDay}
@@ -61,14 +70,22 @@ class CalendarModal extends Component<IProps> {
     );
   }
 
-  private selectDay = (_: {
-    year: number;
-    month: number;
-    day: number;
-    timestamp: number;
-    dateString: string;
-  }) => {
-    // TODO: implement day selection
+  private getMarkedDates = () => {
+    if (!this.state.selectedDay) {
+      return null;
+    }
+
+    return {
+      [this.state.selectedDay.dateString]: {
+        color: Color.BLUE,
+        selected: Color.BLUE
+      }
+    };
+  };
+
+  private selectDay = (day: IDay) => {
+    this.setState(() => ({ selectedDay: day }));
+    this.props.onDaySelect(day.dateString);
   };
 }
 
