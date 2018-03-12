@@ -15,7 +15,10 @@ import CalendarModal from "../components/CalendarModal";
 import Color from "../styles/Color";
 
 interface IState {
+  date: string;
+  guestCount: string;
   isCalendarModalVisible: boolean;
+  location: string;
 }
 
 const styles = StyleSheet.create({
@@ -51,7 +54,10 @@ class Search extends Component<{}, IState> {
     super(props);
 
     this.state = {
-      isCalendarModalVisible: false
+      date: "",
+      guestCount: "1",
+      isCalendarModalVisible: false,
+      location: ""
     };
   }
 
@@ -73,15 +79,27 @@ class Search extends Component<{}, IState> {
         </View>
 
         <ScrollView style={styles.scrollView}>
-          <BMInput label="지역명" style={styles.input} />
+          <BMInput
+            label="지역명"
+            onChangeText={this.setLocation}
+            style={styles.input}
+            value={this.state.location}
+          />
 
           <BMInput
             label="날짜"
-            style={styles.input}
             onFocus={this.openCalendarModal}
+            style={styles.input}
+            value={this.state.date}
           />
 
-          <BMInput label="인원" style={styles.input} />
+          <BMInput
+            keyboardType="numeric"
+            label="인원"
+            onChangeText={this.setGuestCount}
+            style={styles.input}
+            value={this.state.guestCount}
+          />
 
           <BMButton onPress={this.search} title="검색" />
 
@@ -94,12 +112,23 @@ class Search extends Component<{}, IState> {
     );
   }
 
+  private setGuestCount = (guestCount: string) => {
+    this.setState(() => ({ guestCount }));
+  };
+
+  private setLocation = (location: string) => {
+    this.setState(() => ({ location }));
+  };
+
   private goBack = () => {
     this.navigator.pop();
   };
 
   private search = () => {
-    this.route.params.setFilterList({ guestCount: 10 });
+    this.route.params.setFilterList({
+      guestCount: this.state.guestCount,
+      location: this.state.location
+    });
     this.navigator.pop();
   };
 

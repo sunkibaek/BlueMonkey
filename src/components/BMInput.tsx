@@ -1,21 +1,17 @@
 import React, { Component } from "react";
 import {
-  RegisteredStyle,
   StyleSheet,
   Text,
   TextInput,
   TextInputProperties,
-  View,
-  ViewStyle
+  View
 } from "react-native";
 
 import Color from "../styles/Color";
 
-interface IProps {
+type IProps = {
   label: string;
-  onFocus?: TextInputProperties["onFocus"];
-  style: RegisteredStyle<ViewStyle>;
-}
+} & TextInputProperties;
 
 const styles = StyleSheet.create({
   label: {
@@ -34,7 +30,7 @@ class BMInput extends Component<IProps> {
       <View style={this.props.style}>
         <Text style={styles.label}>{this.props.label}</Text>
 
-        <TextInput style={styles.textInput} onFocus={this.props.onFocus} />
+        <TextInput {...this.props} style={styles.textInput} />
       </View>
     );
   }

@@ -10,6 +10,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import Card from "../components/Card";
+import Title from "../components/Title";
 import Color from "../styles/Color";
 import Space from "../styles/Space";
 import { ITrip } from "../typings/trip";
@@ -48,10 +49,21 @@ class List extends Component {
           <Icon color={Color.GRAY} name="search" size={18} />
         </TouchableOpacity>
       ),
-      title: (params: any) => {
-        return params.guestCount
+      renderTitle: ({ params }: any) => {
+        const subtitleTexts = [
+          params.location && `장소: ${params.location}`,
+          params.date && `날짜: ${params.date}`
+        ];
+        const title = params.guestCount
           ? `가장 선호하는 ${params.guestCount}인 여행`
           : "가장 선호하는 여행";
+
+        return (
+          <Title
+            title={title}
+            subtitle={subtitleTexts.filter(t => t).join(", ")}
+          />
+        );
       }
     }
   };
@@ -80,9 +92,15 @@ class List extends Component {
 
   private navigateToSearchModal = () => {
     this.navigator.push("search", {
-      setFilterList: ({ guestCount }: { guestCount: number }) => {
+      setFilterList: ({
+        guestCount,
+        location
+      }: {
+        guestCount: string;
+        location: string;
+      }) => {
         InteractionManager.runAfterInteractions(() => {
-          this.navigator.updateCurrentRouteParams({ guestCount });
+          this.navigator.updateCurrentRouteParams({ guestCount, location });
         });
       }
     });
